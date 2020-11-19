@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
   <title>Employee Payroll Form</title>
-  <link rel="stylesheet" href="../css/EmployeeForm.css">
+  <link rel="stylesheet" href="../Css/EmployeeForm.css">
   <script defer type="text/javascript" src="../Js/EmployeeForm.js"></script>
 </head>
 
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="form-content">
-      <form class="form" action="#" onsubmit="save();">
+      <form class="form" action="#" onsubmit="save()">
         <div class="form-head"> Employee Payroll Form</div>
         <div class="row-content">
           <label class="label text" for="name">Name</label>
@@ -135,6 +135,7 @@
               <option value="2016">2016</option>
             </select>
           </div>
+          <error-output class="date-error" for="startDate"></error-output>
         </div>
         <div class="row-content">
           <label class="label text" for="notes">Notes</label>
@@ -150,3 +151,6 @@
       </form>
     </div>
   </header>
+</body>
+
+</html>
