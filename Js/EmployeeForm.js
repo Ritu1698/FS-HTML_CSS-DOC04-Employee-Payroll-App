@@ -37,7 +37,7 @@ class EmployeePayrollData {
     }
     set gender(gender) {
         if (gender != undefined) {
-            let genderRegex = RegExp('^(Male|Female)$');
+            let genderRegex = RegExp('^(male|female)$');
             if (genderRegex.test(gender)) {
                 this._gender = gender;
             } else {
