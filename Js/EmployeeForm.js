@@ -59,7 +59,7 @@ class EmployeePayrollData {
         }
     }
     toString() {
-        return " Name: " + this.name + " Salary: " + this.salary + " Gender: " + this.gender + " Start Date: " + this.startDate + "Department: " + this.department;
+        return "Name: " + this.name + " Salary: " + this.salary + " Gender: " + this.gender + " Start Date: " + this.startDate + " Department: " + this.department;
     }
 }
 
@@ -107,9 +107,19 @@ function save() {
             department.push(deptCheckboxes[i].value);
         }
         var employee = new EmployeePayrollData(name, salary, gender, startDate, department);
-        alert(employee);
+        event.preventDefault();
+        swal({
+            title: employee,
+            type: "success",
+            showCancelButton: true
+        });
     } catch (error) {
-        alert(error);
+        event.preventDefault();
+        swal({
+            title: error,
+            type: "error",
+            showCancelButton: true
+        });
     }
 }
 
