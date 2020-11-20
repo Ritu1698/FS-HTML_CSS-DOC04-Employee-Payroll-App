@@ -12,7 +12,7 @@ class EmployeePayrollData {
         return this._name;
     }
     set name(name) {
-        let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
+        let nameRegex = RegExp('^([A-Z]{1}[a-z]{2,}\\s{0,1})+$');
         if (nameRegex.test(name))
             this._name = name;
         else throw "Name is incorrect!";
@@ -37,7 +37,7 @@ class EmployeePayrollData {
     }
     set gender(gender) {
         if (gender != undefined) {
-            let genderRegex = RegExp('^(male|female)$');
+            let genderRegex = RegExp('^(Male|Female)$');
             if (genderRegex.test(gender)) {
                 this._gender = gender;
             } else {
