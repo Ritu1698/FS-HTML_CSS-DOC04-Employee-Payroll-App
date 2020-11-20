@@ -6,6 +6,8 @@ class EmployeePayrollData {
         this.gender = params[2];
         this.startDate = params[3];
         this.department = params[4];
+        this.profilePic = params[5];
+        this.notes = params[6];
     }
 
     get name() {
@@ -58,43 +60,33 @@ class EmployeePayrollData {
             else throw "Select valid date!";
         }
     }
+    get profilePic() {
+        return this._profilePic;
+    }
+    set profilePic(profilePic) {
+        if (profilePic != undefined)
+            this._profilePic = profilePic;
+        else
+            throw "Profile Pic incorrect!"
+    }
+    get notes() {
+        return this._notes;
+    }
+    set notes(notes) {
+        if (notes == undefined || notes == "")
+            notes = "NIL";
+        this._notes = notes;
+    }
     toString() {
-        return "Name: " + this.name + " Salary: " + this.salary + " Gender: " + this.gender + " Start Date: " + this.startDate + " Department: " + this.department;
+        return "Name: " + this.name + " Salary: " + this.salary + " Gender: " + this.gender +
+            " Start Date: " + this.startDate + " Department: " + this.department + " Profile Pic: " +
+            this.profilePic + " Notes: " + this.notes;
     }
 }
-
-const salary = document.querySelector('#salary');
-const output = document.querySelector('.salary-output');
-salary.addEventListener('input', function () {
-    output.textContent = salary.value;
-});
-
-const day = document.querySelector('#day');
-const year = document.querySelector('#year');
-const month = document.querySelector('#month');
-const dateError = document.querySelector('.date-error');
-[day, month, year].forEach(item => item.addEventListener('input', function () {
-    if (month.value == 1) {
-        if (isLeapYear(year.value)) {
-            if (day.value > 29) {
-                dateError.textContent = "Invalid Date!";
-            } else dateError.textContent = "";
-        } else {
-            if (day.value > 28) {
-                dateError.textContent = "Invalid Date!";
-            } else dateError.textContent = "";
-        }
-    }
-    if (month.value == 3 || month.value == 5 || month.value == 8 || month.value == 10) {
-        if (day.value > 30) {
-            dateError.textContent = "Invalid Date!";
-        } else dateError.textContent = "";
-    }
-}));
-
 function save() {
     try {
         var name = document.querySelector('#name').value;
+        var profilePic = document.querySelector('input[name=profile]:checked').value;
         var salary = document.querySelector('#salary').value;
         var gender = document.querySelector('input[name=gender]:checked').value;
         var year = document.querySelector('#year').value;
@@ -103,16 +95,18 @@ function save() {
         var startDate = new Date(year, month, day);
         var department = [];
         var deptCheckboxes = document.querySelectorAll('input[name=department]:checked');
+        var notes = document.querySelector('#notes').value;
         for (var i = 0; i < deptCheckboxes.length; i++) {
             department.push(deptCheckboxes[i].value);
         }
-        var employee = new EmployeePayrollData(name, salary, gender, startDate, department);
+        var employee = new EmployeePayrollData(name, salary, gender, startDate, department, profilePic, notes);
         event.preventDefault();
         swal({
-            title: employee,
+            title: "Successfully Added!!!",
             type: "success",
             showCancelButton: true
         });
+        createAndUpdateStorage(employee);
     } catch (error) {
         event.preventDefault();
         swal({
@@ -123,6 +117,25 @@ function save() {
     }
 }
 
+function createAndUpdateStorage(employeePayrollData) {
+    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+    if (employeePayrollList != undefined) {
+
+        employeePayrollList.push(employeePayrollData);
+    }
+    else {
+        employeePayrollList = [employeePayrollData];
+    }
+    console.log(employeePayrollList.toString());
+    event.preventDefault();
+    swal({
+        title: employeePayrollData.toString(),
+        type: "success",
+        showCancelButton: true
+    });
+    localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList))
+
+}
 const isLeapYear = (year) => {
     let result = false;
     if (year % 4 == 0) {
