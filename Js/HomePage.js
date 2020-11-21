@@ -1,6 +1,13 @@
+let empList;
 window.addEventListener('DOMContentLoaded', (event) => {
+    empList = getEmployeePayrollDataFromStorage();
+    document.querySelector(".emp-count").textContent = empList.length;
     createInnerHtml();
-})
+});
+
+const getEmployeePayrollDataFromStorage = () => {
+    return localStorage.getItem('EmployeePayrollList') ? JSON.parse(localStorage.getItem('EmployeePayrollList')) : [];
+}
 
 const createInnerHtml = () => {
     const headerHtml = `<tr>
@@ -13,7 +20,6 @@ const createInnerHtml = () => {
     <th>Actions</th>
   </tr>`;
     let innerHtml = ` ${headerHtml}`;
-    let empList = createEmployeePayrollJSON();
     for (const employee of empList) {
         innerHtml = `${innerHtml}
         <tr>
@@ -32,34 +38,6 @@ const createInnerHtml = () => {
         </tr>`;
     };
     document.querySelector('#table-display').innerHTML = innerHtml;
-}
-
-const createEmployeePayrollJSON = () => {
-    let empPayrollListLocal = [
-        {
-            "_name": "Rituparna Biswas",
-            "_gender": "Female",
-            "_department": [
-                "Engineering"
-            ],
-            "_salary": "400000",
-            "_startDate": "16 Dec 2018",
-            "_notes": "",
-            "_profilePic": "../assets/profile-images/Ellipse -4.png"
-        },
-        {
-            "_name": "Dyotana Das",
-            "_gender": "Female",
-            "_department": [
-                "Sales", "Marketing"
-            ],
-            "_salary": "500000",
-            "_startDate": "19 Sept 2020",
-            "_notes": "",
-            "_profilePic": "../assets/profile-images/Ellipse -1.png"
-        }
-    ]
-    return empPayrollListLocal;
 }
 
 const getDeptHtml = (departmentList) => {
