@@ -168,7 +168,7 @@ function createAndUpdateStorage(employeePayrollData) {
         type: "success",
         showCancelButton: true
     });
-    localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList))
+    localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
 }
 const isLeapYear = (year) => {
     let result = false;
