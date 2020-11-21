@@ -1,5 +1,10 @@
 class EmployeePayrollData {
-
+    get id() {
+        return this._id;
+    }
+    set id(id) {
+        this._id = id;
+    }
     get name() {
         return this._name;
     }
@@ -43,8 +48,8 @@ class EmployeePayrollData {
     set startDate(startDate) {
         if (startDate != undefined) {
             if (startDate <= new Date()) {
-                const options = { year: "numeric", month: "long", day: "numeric" };
-                const employeeDate = startDate.toLocaleDateString("en-US", options);
+                const options = { year: "numeric", month: "short", day: "numeric" };
+                const employeeDate = startDate.toLocaleDateString("en-GB", options);
                 this._startDate = employeeDate;
             }
             else throw "Select valid date!";
@@ -161,7 +166,6 @@ function createAndUpdateStorage(employeePayrollData) {
         showCancelButton: true
     });
     localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList))
-
 }
 const isLeapYear = (year) => {
     let result = false;

@@ -31,9 +31,9 @@ const createInnerHtml = () => {
           <td>${employee._startDate}</td>
           <td>
           <img name="${employee._id}" onclick="remove(this)" alt="delete" 
-                  src="../assets/icons/delete-black-18dp.svg">
+                  src="../Assets/icons/delete-black-18dp.svg">
           <img name="${employee._id}" onclick="update(this)" alt="edit" 
-                  src="../assets/icons/create-black-18dp.svg">
+                  src="../Assets/icons/create-black-18dp.svg">
           </td>
         </tr>`;
     };
