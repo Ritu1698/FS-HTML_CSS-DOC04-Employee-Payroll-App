@@ -1,15 +1,5 @@
 class EmployeePayrollData {
 
-    constructor(...params) {
-        this.name = params[0];
-        this.salary = params[1];
-        this.gender = params[2];
-        this.startDate = params[3];
-        this.department = params[4];
-        this.profilePic = params[5];
-        this.notes = params[6];
-    }
-
     get name() {
         return this._name;
     }
@@ -129,7 +119,14 @@ function save() {
         for (var i = 0; i < deptCheckboxes.length; i++) {
             department.push(deptCheckboxes[i].value);
         }
-        var employee = new EmployeePayrollData(name, salary, gender, startDate, department, profilePic, notes);
+        var employee = new EmployeePayrollData();
+        employee.name = name;
+        employee.gender = gender;
+        employee.notes = notes;
+        employee.profilePic = profilePic;
+        employee.department = department;
+        employee.salary = salary;
+        employee.startDate = startDate;
         event.preventDefault();
         swal({
             title: "Successfully Added!!!",
