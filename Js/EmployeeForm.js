@@ -73,7 +73,7 @@ class EmployeePayrollData {
         this._notes = notes;
     }
     toString() {
-        return "Name: " + this.name + " Salary: " + this.salary + " Gender: " + this.gender +
+        return "Id: " + this.id + " Name: " + this.name + " Salary: " + this.salary + " Gender: " + this.gender +
             " Start Date: " + this.startDate + " Department: " + this.department + " Profile Pic: " +
             this.profilePic + " Notes: " + this.notes;
     }
@@ -132,6 +132,10 @@ function save() {
         employee.department = department;
         employee.salary = salary;
         employee.startDate = startDate;
+        let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+        if (employeePayrollList == undefined)
+            employee.id = 1;
+        else employee.id = employeePayrollList.length + 1;
         event.preventDefault();
         swal({
             title: "Successfully Added!!!",
@@ -152,7 +156,6 @@ function save() {
 function createAndUpdateStorage(employeePayrollData) {
     let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
     if (employeePayrollList != undefined) {
-
         employeePayrollList.push(employeePayrollData);
     }
     else {
